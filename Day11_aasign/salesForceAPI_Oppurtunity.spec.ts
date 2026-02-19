@@ -2,13 +2,15 @@
 
 
 import { test, expect } from "@playwright/test";
+import dotenv from "dotenv";
 
+let filename= process.env.envfile || "salesForceAPI" 
 
 let token: any
 let inst_url: any
 let tokenType: any
 let id: any
-
+dotenv.config({path:`Data/${filename}.env`})
 test.describe.serial(`Salesforce`, async () => {
 
     test(`Generate Token`, async ({ request }) => {
@@ -19,10 +21,10 @@ test.describe.serial(`Salesforce`, async () => {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 form: {
-                    "client_id": "3MVG9dAEux2v1sLvd8PBuCGs_vxRlmDczyzbm48kJkyd3WftWice7epzlTzCNJGdaAnSwYa_IwBj8f9sMftGN",
-                    "client_secret": "FDB8E2CA7852B964D751CCDFC7E7EAA6D1047A7D0D0A3CCF1CCE98AB8DB936FB",
-                    "username": "helloshanmugavel.16ac0b72a5a7@agentforce.com",
-                    "password": "Shan@3046WKlUVXsofbdffJzIBZWlhlfc4",
+                    "client_id": process.env.SF_CLIENT_ID!,
+                    "client_secret": process.env.SF_CLIENT_SECRET!,
+                    "username": process.env.SF_USERNAME!,
+                    "password": process.env.SF_PASSWORD!,
                     "grant_type": "password",
                 }
             }
